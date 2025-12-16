@@ -1,4 +1,4 @@
-import { WebSocketServer } from "ws";
+const { WebSocketServer } = require("ws");
 
 const PORT = process.env.PORT || 3000;
 const wss = new WebSocketServer({ port: PORT });
@@ -36,7 +36,7 @@ wss.on("connection", (ws) => {
         });
     }
 
-    ws.on("message", msg => {
+    ws.on("message", (msg) => {
         rooms[roomId].players.forEach(p => {
             if (p.ws !== ws) p.ws.send(msg.toString());
         });
